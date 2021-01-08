@@ -1,0 +1,44 @@
+{
+  "name": "quasar-vue-app",
+  "version": "1.0.0",
+  "description": "A Quasar Framework app",
+  "productName": "App",
+  "author": "Peter Badinka <peter.badinka44@gmail.com>",
+  "private": true,
+  "scripts": {
+    "build": "quasar build",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "address": "^1.1.2",
+    "axios": "^0.18.1",
+    "connect-history-api-fallback": "^1.6.0",
+    "core-js": "^3.6.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7",
+    "quasar": "^1.0.0",
+    "serve-static": "^1.14.1"
+  },
+  "devDependencies": {
+    "@quasar/app": "^2.0.0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.1.0"
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4"
+  }
+}
