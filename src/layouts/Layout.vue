@@ -15,7 +15,7 @@
           {{ activeLabel }}
         </q-toolbar-title>
 
-        <div>v1.0.0</div>
+        <div>v1.0.3</div>
       </q-toolbar>
     </q-header>
 
@@ -27,15 +27,15 @@
 					:to="nav.to"
 					:icon="nav.icon" 
 					:label="nav.label" 
+					style="display:none"
 					@click="activeLabel = nav.label" />
       </q-tabs>
 		</q-footer>
 
     <q-drawer
-			:breakpoint="768"
 			:width="250"	
       v-model="leftDrawerOpen"
-      show-if-above
+      hide-if-above
       bordered
       content-class="bg-grey-1"
     >
@@ -77,10 +77,10 @@ export default {
   data () {
     return {
 			leftDrawerOpen: false,
-			activeLabel: 'Todo App',
+			activeLabel: 'Call-Page',
 			navs: [
-				{ label: 'Todo App', icon: 'list', to: '/', },
-				{ label: 'Call-Page', icon: 'list', to: '/callpage', },
+				{ label: 'Call-Page', icon: 'call', to: '/', },
+				{ label: 'Todo App', icon: 'list', to: '/todo', },				
 				{ label: 'Settings', icon: 'settings', to: '/settings', },
 				{ label: 'Contact', icon: 'contact_support', to: '/contact', },
 			]			
@@ -90,9 +90,9 @@ export default {
 </script>
 
 <style lang="scss">
-	@media screen and (min-width: 768px) {
-		.q-footer {
-			display: none;
-		}
-	}
+	// @media screen and (min-width: 768px) {
+	// 	.q-footer {
+	// 		display: none;
+	// 	}
+	// }
 </style>
