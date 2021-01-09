@@ -79,21 +79,10 @@ export default {
 			leftDrawerOpen: false,
 			activeLabel: 'Todo App',
 			navs: [
-				{
-					label: 'Todo App',
-					icon: 'list',
-					to: '/',
-				},
-				{
-					label: 'Settings',
-					icon: 'settings',
-					to: '/settings',
-				},
-				{
-					label: 'Contact',
-					icon: 'contact_support',
-					to: '/contact',
-				},
+				{ label: 'Todo App', icon: 'list', to: '/', },
+				{ label: 'Call-Page', icon: 'list', to: '/callpage', },
+				{ label: 'Settings', icon: 'settings', to: '/settings', },
+				{ label: 'Contact', icon: 'contact_support', to: '/contact', },
 			]			
     }
   }

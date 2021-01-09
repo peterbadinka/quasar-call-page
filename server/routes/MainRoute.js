@@ -1,7 +1,10 @@
-const express = require('express')
-const MainController = require('../controllers/MainController')
-const Auth = require('../midleware/Auth')
-const Route = express.Router()
+const 
+	express = require('express'),
+	MainController = require('../controllers/MainController'),
+	Auth = require('../midleware/Auth'),
+	bodyParser = require('body-parser'),
+	jsonParser = bodyParser.json(),
+	Route = express.Router()
 
 //=======================================================================
 // Midleware
@@ -11,7 +14,7 @@ Route.use(Auth.valid)
 //=======================================================================
 // Routes
 //=======================================================================
-Route.get('/api/conn', MainController.conn)
+Route.post('/api/conn', jsonParser, MainController.conn )
 
 
 module.exports = Route;

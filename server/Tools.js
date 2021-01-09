@@ -1,6 +1,39 @@
 class Tools {
 
 	//=======================================================================
+	// DB update
+	//=======================================================================
+	static sqlUpdate(tableName, json){
+
+		let sql = "UPDATE "+tableName+" SET"
+		for (var key in json) {
+			if (json.hasOwnProperty(key)) {
+				sql += " "+key+" = '"+json[key]+"',"
+			}
+		}
+		sql = sql.substring(0, sql.length - 1)
+		sql += " WHERE id_person = '"+json.id_person+"'"
+		sql += " LIMIT 1"
+
+		return sql
+
+	}
+
+	//=======================================================================
+	// jsonToarray
+	//=======================================================================
+	static jsonToarray(json){
+
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+		return result;
+		
+	}
+
+	//=======================================================================
 	// Random string / ID
 	//=======================================================================
 	static randString(length){

@@ -1,15 +1,19 @@
 <template>
-	<form name="login-form" @submit.prevent class="absolute-center login q-md-xl">
+	<form 
+		id="login_form" 
+		name="login-form" 
+		@submit.prevent
+		class="absolute-center login q-md-xl">
 		
 		<q-input 
 			v-model="email"
 			@keyup.enter="login"
 			name="email"
 			label="Email"
-		 	filled 
-			 type="search"
-			 style="background: #e8f0fe42"
-			 class="q-mb-sm">
+			filled 
+			type="search"
+			style="background: #e8f0fe42"
+			class="q-mb-sm">
 			<template v-slot:append>
 				<q-icon name="email" />
 			</template>
@@ -29,12 +33,11 @@
 			</template>
 		</q-input>
 
-		<q-btn @click="login" color="primary" label="Login" class="q-mt-sm"></q-btn>	
+		<q-btn @click="login" color="primary" label="Login" class="q-mt-sm"></q-btn>
 
 		<q-dialog></q-dialog>
 
-	</form>		
-
+	</form>
 </template>
 
 <script>
@@ -48,15 +51,15 @@ export default {
 		return {
 			pass: '',
 			email: '',
-			isPwd: true
+			isPwd: true,	
 		}
 	},
-	methods: {	
+	methods: {
 		login() {		
 			// Loading.show()
 			Loading.show({ spinner: QSpinnerGears })
 				
-			let access = axios.get("/api/login/"+this.email+"/"+this.pass)
+			let access = axios.get("http://app-44.herokuapp.com/api/login/"+this.email+"/"+this.pass)
 			
 			.then((response) => {
 

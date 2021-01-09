@@ -1,15 +1,19 @@
+const express = require('express')
+const Tools = require('../Tools')
 const {db_1} = require('../db')
-const Tools = require ('../Tools')
-const address = require('address')
-const axios = require('axios')
+app = express()
 
 class MainController{
 
-	static conn(req, res){
-		
-		let sql = "SELECT email FROM users";
-		db_1.query(sql, (err, result, field) => {
-			res.send(result)
+	static conn(req, res){		
+
+		let json = req.body
+
+		let sql = Tools.sqlUpdate("main_db", json)
+		db_1.query(sql, (err, response) => {
+			if(err) res.send(err)
+			console.log(sql)
+			res.send(sql)
 		})
 
 	}
