@@ -13,12 +13,7 @@
 					<template v-slot:append>
 						<q-icon name="close" @click="text = ''" class="cursor-pointer" />
 					</template>
-
-        <template>
-          
-        </template>
       </q-input>
-
 		</div>
 
 </template>

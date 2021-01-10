@@ -51,22 +51,22 @@ export default {
 		return {
 			pass: '',
 			email: '',
-			isPwd: true,	
+			isPwd: true,
 		}
 	},
-	methods: {
+	methods: {		
 		login() {		
 			// Loading.show()
 			Loading.show({ spinner: QSpinnerGears })
 				
-			let access = axios.get("/api/login/"+this.email+"/"+this.pass)
+			let access = axios.get("https://app-44.herokuapp.com/api/login/"+this.email+"/"+this.pass)
 			
 			.then((response) => {
 
 				this.timer = setTimeout(() => {
 					Loading.hide()
 					if(response.data.access == true) {
-						this.$emit('changeAccess', true)
+						this.$emit('changeAccess', response.data)
 					}	
 					else {
 						this.$emit('changeAccess', false)

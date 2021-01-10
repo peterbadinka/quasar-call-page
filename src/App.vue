@@ -1,26 +1,28 @@
 <template>
   <div id="q-app">
-		<login-page v-if="!access" @changeAccess="changeAccess"></login-page>
-    <router-view v-if="access" />
+
+		<login-page v-if="!$store.state.app.appData.access" @changeAccess="changeAccess"></login-page>
+    <router-view v-if="$store.state.app.appData.access" />
+
   </div>
 </template>
+
 <script>
 
 export default {
 	name: 'App',
-	data() {
+	data(){
 		return {
-			access: false
+			devMode: true
 		}
 	},
 	methods: {
 		changeAccess(result) {
-			this.access = result
+			this.$store.commit('login', result)
 		}
 	},
 	components: {
-		'login-page': require('pages/PageLogin').default,
-		'contact-page': require('pages/PageContact').default
+		'login-page': require('pages/PageLogin').default
 	}
 }
 </script>
