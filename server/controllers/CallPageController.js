@@ -2,14 +2,9 @@ const {db_1} = require('../db')
 const { sqlUpdate } = require('../Tools')
 const Tools = require ('../Tools')
 
-const express = require('express')
-app = express()
-
 class CallPageController {	
 
-	static getCustomData(req, res) {
-		
-		res.header("Access-Control-Allow-Origin", "*")
+	static getCustomData(req, res) {		
 
 		let sqlMesta = ''
 		let array = req.body.mesta
@@ -44,6 +39,7 @@ class CallPageController {
 
 		db_1.query(sql, (err, result) => {
 			if(err) res.send(err)
+			res.header("Access-Control-Allow-Origin", "*")
 			res.send(result)
 		})
 	}
