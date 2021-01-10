@@ -39,7 +39,6 @@ class CallPageController {
 
 		db_1.query(sql, (err, result) => {
 			if(err) res.send(err)
-			res.header("Access-Control-Allow-Origin", "*")
 			res.send(result)
 		})
 	}

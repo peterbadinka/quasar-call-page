@@ -1,12 +1,17 @@
-const express = require('express')
-const serveStatic = require('serve-static')
-const history = require('connect-history-api-fallback')
+const 
+	express = require('express'),
+	serveStatic = require('serve-static'),
+	history = require('connect-history-api-fallback'),
 
-const MainRoute = require('./server/routes/MainRoute')
-const LoginController = require('./server/controllers/LoginController')
+	MainRoute = require('./server/routes/MainRoute'),
+	LoginController = require('./server/controllers/LoginController'),
+	CallPageController = require('./server/controllers/CallPageController'),
 
-const app = express()
-const port = process.env.PORT || 5000
+	bodyParser = require('body-parser'),
+	jsonParser = bodyParser.json(),
+
+	app = express(),
+	port = process.env.PORT || 5000
 
 app.listen(port)
 
@@ -20,7 +25,8 @@ app.use(function(req, res, next) {
 //=======================================================================
 app.get('/api', (req, res) => { res.send('API v1.0.4') })
 app.get('/api/login/:username/:password', LoginController.login)
-app.use(MainRoute);
+app.post('/api/call-page/custom-data', jsonParser, CallPageController.getCustomData )
+// app.use(MainRoute);
 
 //=======================================================================
 // Quasar/Vue App
