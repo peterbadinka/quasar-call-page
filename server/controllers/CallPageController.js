@@ -8,11 +8,8 @@ app = express()
 class CallPageController {	
 
 	static getCustomData(req, res) {
-
-		app.use(function(req, res, next) {
-			res.header("Access-Control-Allow-Origin", "*")
-			next()
-		})
+		
+		res.header("Access-Control-Allow-Origin", "*")
 
 		let sqlMesta = ''
 		let array = req.body.mesta
