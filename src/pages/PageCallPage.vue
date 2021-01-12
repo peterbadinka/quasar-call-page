@@ -186,16 +186,12 @@
 							filled 
 							type="date"
 							style="width: 180px">
-						</q-input>				
+						</q-input>			
 
-						<q-input 
-							class="q-mt-xs"
-							label="Produkty"
-							v-model="produkty" 
-							filled 
-							type="text"
-							style="width: 100%">
-						</q-input>
+						<select-products 
+							:produkty="produkty"
+							@updateProducts="updateProducts"
+						></select-products>
 
 						<q-input 
 							class="q-mt-xs"
@@ -377,6 +373,9 @@ export default {
 				}
 			}
 		},
+		updateProducts(val){
+			this.produkty = val
+		},
 		//=======================================================================
 		// format date dd.mm.yyyy
 		//=======================================================================
@@ -477,7 +476,7 @@ export default {
 	// components
 	//===================================================================================================
 	components: {
-		
+		'select-products': require('components/CallPage/SelectProdukts').default,
 	}
 }
 </script>
