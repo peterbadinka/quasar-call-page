@@ -5,8 +5,8 @@ const routes = [
     component: () => import('layouts/Layout.vue'),
     children: [			
 			{ path: '/', component: () => import('pages/PageCallPage.vue') },
-			{ path: '/todo', component: () => import('pages/PageTodo.vue') },
-			{ path: '/settings', component: () => import('pages/PageSettings.vue') },
+			// { path: '/todo', component: () => import('pages/PageTodo.vue') },
+			// { path: '/settings', component: () => import('pages/PageSettings.vue') },
 			{ path: '/contact', component: () => import('pages/PageContact.vue') },
     ]
   },

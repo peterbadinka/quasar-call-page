@@ -59,17 +59,17 @@ export default {
 			// Loading.show()
 			Loading.show({ spinner: QSpinnerGears })
 				
-			let access = axios.get("https://app-44.herokuapp.com/api/login/"+this.email+"/"+this.pass)
+			let access = axios.get("/api/login/"+this.email+"/"+this.pass)
 			
 			.then((response) => {
 
 				this.timer = setTimeout(() => {
 					Loading.hide()
 					if(response.data.access == true) {
-						this.$emit('changeAccess', response.data)
+						this.$store.commit('login', response.data)
 					}	
 					else {
-						this.$emit('changeAccess', false)
+						this.$store.commit('login', response.data)
 						this.$q.dialog({
 							title: 'Login',
 							message: 'Wrong username or password.',

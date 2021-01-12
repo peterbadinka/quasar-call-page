@@ -80,8 +80,8 @@ export default {
 			activeLabel: 'Call-Page',
 			navs: [
 				{ label: 'Call-Page', icon: 'call', to: '/', },
-				{ label: 'Todo App', icon: 'list', to: '/todo', },
-				{ label: 'Settings', icon: 'settings', to: '/settings', },
+				// { label: 'Todo App', icon: 'list', to: '/todo', },
+				// { label: 'Settings', icon: 'settings', to: '/settings', },
 				{ label: 'Contact', icon: 'contact_support', to: '/contact', },
 			]			
     }

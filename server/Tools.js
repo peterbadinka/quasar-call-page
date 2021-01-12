@@ -3,7 +3,7 @@ class Tools {
 	//=======================================================================
 	// DB update
 	//=======================================================================
-	static sqlUpdate(tableName, json){
+	static sqlUpdateGen(tableName, json){
 
 		let sql = "UPDATE "+tableName+" SET"
 		for (var key in json) {
@@ -49,11 +49,28 @@ class Tools {
 	}
 
 	//=======================================================================
+	// Date formar - YYYY-MM-DD
+	//=======================================================================
+	static dateToYMD(date) {
+ 
+		let datum =  new Date(date)
+    let d = datum.getDate()
+    let m = datum.getMonth() + 1; //Month from 0 to 11
+		let y = datum.getFullYear()
+
+		let result = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d)
+		if(result == "NaN-NaN-NaN") result = "0000-00-00"
+
+		return result
+		
+	}
+
+	//=======================================================================
 	// Date formar - YYYY-MM-DD hh:mm:ss
 	//=======================================================================
-	static dateToYMD_hhmmss() {
+	static dateToYMD_hhmmss(date) {
  
-		let datum =  new Date()
+		let datum =  new Date(date)
 		let sec = datum.getSeconds()
 		let min = datum.getMinutes()
 		let hod = datum.getHours()
@@ -87,6 +104,20 @@ class Tools {
 		
 		return result
 
+	}
+
+	//=======================================================================
+	// Format phone {only numbers}
+	//=======================================================================
+	static formatPhone(_p) {
+		let phone = ''
+		for(var i = 0; i < _p.length; i++){
+			let p = _p[i].toString()
+			if(p == '0' || p == '1' || p == '2' || p == '3' || p == '4' || p == '5' || p == '6' || p == '7' || p == '8' || p == '9'){
+				phone += p
+			}
+		}
+		return phone
 	}
 
 }

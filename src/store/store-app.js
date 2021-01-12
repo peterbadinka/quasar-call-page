@@ -1,11 +1,10 @@
-import { login } from "app/server/controllers/LoginController"
-
 export default {
 	state: {
-		appData: {
+		appData: {			
 			access: false,
-			key_api: null,
-			data: null
+			userName: '',  
+			key_api: '',
+			dataUser: []
 		}
 	},
 	mutations: {
@@ -15,6 +14,9 @@ export default {
 		},
 		login(state, payload) {
 			state.appData = payload;
+		},
+		logout(state) {
+			state.appData.access = false;
 		}
 	}
 }

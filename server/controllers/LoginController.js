@@ -8,14 +8,15 @@ class LoginController{
 	static login(req, res){
 
 		// Check access
-		let url = "https://crm-4.online/api.php"
-		url += "?username=" + req.params.username
+		let url = "https://crm-4.online/api.php?action=app_login"
+		url += "&username=" + req.params.username
 		url += "&password=" + req.params.password
 		axios.get(url).then((response) => {
 			
 			let key = ''
-			let access = response.data.access		
-			if(access == 'true') {
+			let access = response.data.access
+			let access_app = response.data.access_app
+			if(access == 'true' && access_app == 'true') {
 				access = true
 				key = Tools.randString(32)
 			} else {access = false}
@@ -24,7 +25,7 @@ class LoginController{
 			let sql = "INSERT INTO login"
 			sql += " (`date`, `email`, `access`, `ip`, `ipv6`, `key`)"
 			sql += " VALUES ("
-			sql += " '" + Tools.dateToYMD_hhmmss() + "'"
+			sql += " '" + Tools.dateToYMD_hhmmss(new Date()) + "'"
 			sql += ", '" + req.params.username + "'"
 			sql += ", '" + access + "'"
 			sql += ", '" + address.ip() + "'"
@@ -50,10 +51,16 @@ class LoginController{
 
 					// Get user data
 					let sql = "SELECT * FROM users"
-					sql += " WHERE email = '" + req.params.username + "'"				
+					sql += " WHERE email = '" + req.params.username + "'"
 					db_1.query(sql, (err, result, field) => {
 						if(err) res.send({ username: req.params.username, access: false, err: err})
-						res.send({ username: req.params.username, access: true, key: key, data: result })
+						res.send({ 
+							userName: req.params.username, 
+							access: true, 
+							key_api: key,
+							dataUser: result[0]
+						})
+
 					})
 
 				})				

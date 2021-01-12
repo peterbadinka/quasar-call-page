@@ -1,7 +1,7 @@
 <template>
   <div id="q-app">
 
-		<login-page v-if="!$store.state.app.appData.access" @changeAccess="changeAccess"></login-page>
+		<login-page v-if="!$store.state.app.appData.access" />
     <router-view v-if="$store.state.app.appData.access" />
 
   </div>
@@ -17,9 +17,7 @@ export default {
 		}
 	},
 	methods: {
-		changeAccess(result) {
-			this.$store.commit('login', result)
-		}
+
 	},
 	components: {
 		'login-page': require('pages/PageLogin').default
