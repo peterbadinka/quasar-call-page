@@ -1,5 +1,6 @@
 const 
 	express = require('express'),
+	cors = require('cors')
 	serveStatic = require('serve-static'),
 	history = require('connect-history-api-fallback'),
 
@@ -7,14 +8,17 @@ const
 	LoginController = require('./server/controllers/LoginController'),
 
 	app = express(),
-	port = process.env.PORT || 5000
 
-app.listen(port)
+	corsOptions = {
+		origin: '*'
+	}
 
-app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*")
-	next()
-})
+	app.use(cors(corsOptions))	
+
+// app.use(function(req, res, next) {
+// 	res.header("Access-Control-Allow-Origin", "*")
+// 	next()
+// })
 
 //=======================================================================
 // API
@@ -28,3 +32,9 @@ app.use(MainRoute);
 //=======================================================================
 app.use(history())
 app.use(serveStatic(__dirname + '/dist/spa'))
+
+//=======================================================================
+// PORT
+//=======================================================================
+port = process.env.PORT || 5000
+app.listen(port)
