@@ -6,11 +6,10 @@ const axios = require('axios')
 class LoginController{
 	
 	static login(req, res){
-
 		// Check access
 		let url = "https://crm-4.online/api.php?action=app_login"
-		url += "&username=" + req.params.username
-		url += "&password=" + req.params.password
+		url += "&username=" + req.body.username
+		url += "&password=" + req.body.password
 		axios.get(url).then((response) => {
 			
 			let key = ''
@@ -26,7 +25,7 @@ class LoginController{
 			sql += " (`date`, `email`, `access`, `ip`, `ipv6`, `key`)"
 			sql += " VALUES ("
 			sql += " '" + Tools.dateToYMD_hhmmss(new Date()) + "'"
-			sql += ", '" + req.params.username + "'"
+			sql += ", '" + req.body.username + "'"
 			sql += ", '" + access + "'"
 			sql += ", '" + address.ip() + "'"
 			sql += ", '" + address.ipv6() + "'"
@@ -35,27 +34,27 @@ class LoginController{
 
 			// Ulozi sa req
 			db_1.query(sql, (err, result, field) => {
-				if(err) res.send({ username: req.params.username, access: false, err: err}) // err
+				if(err) res.send({ username: req.body.username, access: false, err: err}) // err
 			})
 
 			// Access == false
-			if(access == false) res.send({ username: req.params.username, access: false })			
+			if(access == false) res.send({ username: req.body.username, access: false })			
 			else { // Access == true
 
 				// Save key
 				let sql = "UPDATE users"
 				sql += " SET key_api = '" + key + "'"
-				sql += " WHERE email = '" + req.params.username + "'"
+				sql += " WHERE email = '" + req.body.username + "'"
 				db_1.query(sql, (err, result, field) => {
-					if(err) res.send({ username: req.params.username, access: false, err: err})
+					if(err) res.send({ username: req.body.username, access: false, err: err})
 
 					// Get user data
 					let sql = "SELECT * FROM users"
-					sql += " WHERE email = '" + req.params.username + "'"
+					sql += " WHERE email = '" + req.body.username + "'"
 					db_1.query(sql, (err, result, field) => {
-						if(err) res.send({ username: req.params.username, access: false, err: err})
+						if(err) res.send({ username: req.body.username, access: false, err: err})
 						res.send({ 
-							userName: req.params.username, 
+							userName: req.body.username, 
 							access: true, 
 							key_api: key,
 							dataUser: result[0]

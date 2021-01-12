@@ -54,15 +54,14 @@ export default {
 			isPwd: true,
 		}
 	},
-	methods: {		
+	methods: {			
 		login() {		
 			// Loading.show()
 			Loading.show({ spinner: QSpinnerGears })
-				
-			let access = axios.get("https://app-44.herokuapp.com/api/login/"+this.email+"/"+this.pass)
-			
-			.then((response) => {
-
+			let access = axios.post("https://crm-4.online/api/login/", {
+				username: this.email,
+				password: this.pass
+			}).then((response) => {
 				this.timer = setTimeout(() => {
 					Loading.hide()
 					if(response.data.access == true) {
@@ -78,12 +77,10 @@ export default {
 							// persistent: true
 						})
 					}
-
-				}, 200)
-				
+				}, 200)				
 			})
-		}
-	},
+		},
+	}
 }
 </script>
 

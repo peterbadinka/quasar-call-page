@@ -3,6 +3,8 @@ const
 	cors = require('cors')
 	serveStatic = require('serve-static'),
 	history = require('connect-history-api-fallback'),
+	bodyParser = require('body-parser'),
+	jsonParser = bodyParser.json(),
 
 	MainRoute = require('./server/routes/MainRoute'),
 	LoginController = require('./server/controllers/LoginController'),
@@ -12,19 +14,13 @@ const
 	corsOptions = {
 		origin: '*'
 	}
-
-	app.use(cors(corsOptions))	
-
-// app.use(function(req, res, next) {
-// 	res.header("Access-Control-Allow-Origin", "*")
-// 	next()
-// })
+	app.use(cors(corsOptions))
 
 //=======================================================================
 // API
 //=======================================================================
 app.get('/api', (req, res) => { res.send('API v1.0.4') })
-app.get('/api/login/:username/:password', LoginController.login)
+app.post('/api/login', jsonParser, LoginController.login)
 app.use(MainRoute);
 
 //=======================================================================
