@@ -1,7 +1,6 @@
 const express = require('express')
 const serveStatic = require('serve-static')
 const history = require('connect-history-api-fallback')
-// const cors = require('cors')
 const bodyParser = require('body-parser')
 const jsonParser = bodyParser.json()
 
@@ -9,10 +8,6 @@ const MainRoute = require('./server/routes/MainRoute')
 const LoginController = require('./server/controllers/LoginController')
 
 const app = express()
-// const corsOptions = {
-// 	origin: '*'
-// }
-// app.use(cors(corsOptions))
 
 app.use(function(req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
@@ -30,7 +25,7 @@ app.post('/api/login', jsonParser, LoginController.login)
 app.use(MainRoute);
 
 //=======================================================================
-// Quasar/Vue App
+// Quasar App
 //=======================================================================
 app.use(history())
 app.use(serveStatic(__dirname + '/dist/spa'))
