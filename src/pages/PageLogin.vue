@@ -58,7 +58,7 @@ export default {
 		login() {		
 			// Loading.show()
 			Loading.show({ spinner: QSpinnerGears })
-			let access = axios.post("https://crm-4.online/api/login/", {
+			let access = axios.post("https://crm-4.online/api/login", {
 				username: this.email,
 				password: this.pass
 			}).then((response) => {
