@@ -34,7 +34,8 @@
 		<!-- =================================================================== -->
 		<div class="q-pr-md">
 			<q-select
-				label="Mesto"
+				label="Mesto"			
+				ref="mesto"
         transition-show="flip-up"
         transition-hide="flip-down"
         filled
@@ -468,6 +469,9 @@ export default {
 		string = string.replace(/'/gi, "");
 		let array = string.split(",")		
 		this.options = array
+		this.$nextTick(() => {
+			this.$refs.mesto.focus()
+		});
 	},
 	//===================================================================================================
 	// components

@@ -59,7 +59,7 @@ export default {
 			// Loading.show()
 			Loading.show({ spinner: QSpinnerGears })
 				
-			let access = axios.get("/api/login/"+this.email+"/"+this.pass)
+			let access = axios.get("https://app-44.herokuapp.com/api/login/"+this.email+"/"+this.pass)
 			
 			.then((response) => {
 
