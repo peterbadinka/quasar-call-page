@@ -132,13 +132,42 @@
 		<!-- =================================================================== -->
 		<!-- table -->
 		<!-- =================================================================== -->
+		<table 
+			class="table q-mt-sm"				
+			v-if="table_items_h.length > 0"
+		>
+			<tr v-for="(item, index) in table_items_h"				
+				:key="index">
+				<td>{{ dateToDMY(item.date_upg) }}</td>
+				<td>{{ item.id_user }}</td>
+				<td>{{ item.stav }}</td>
+				<td>{{ item.produkt }}</td>
+				<td>{{ item.poznamka }}</td>
+			</tr>
+		</table>
+
+		<!-- =================================================================== -->
+		<!-- btn reload -->
+		<!-- =================================================================== -->
+		<q-btn label=""
+			type="submit" 
+			color="primary" 
+			style="width: 54px; height: 54px;"
+			@click="reloadData"
+			class="q-mt-sm">
+			<q-icon name="cached" />
+		</q-btn>
+
+		<!-- =================================================================== -->
+		<!-- table -->
+		<!-- =================================================================== -->
 		<div v-if="table_items.length > 0">	
 			<table class="table">
 				<tr>
 					<th style="text-align: left;">Dátum</th>
 					<th style="text-align: left;">Meno</th>
 					<th style="text-align: left;">Stav</th>
-					<th style="text-align: left;">produkty</th>
+					<th style="text-align: left;">Produkty</th>
 					<th style="text-align: left;">Poznamka</th>	
 				</tr>
 				<tr 
@@ -155,6 +184,7 @@
 			</table>
 			<div class="popText">Počet riadkov: {{ table_items.length }}</div>
 		</div>
+
 
 		<q-dialog></q-dialog>
 
@@ -186,13 +216,21 @@ export default {
 			stav_opt: ['vyzváňal', 'nedostupný', 'číslo neexistuje','nemá záujem',
 				'nemá záujem - starobný dôchodca','kontaktovať inokedy','dohodnuté stretnutie',
 				'nekontaktovať','nekontaktovať - osobný blacklist','potenciálny pohovor','klient'],
+			table_items_h: [],
 			table_items: [],
 			datum_akcie: '',			
 			poznamka: '',
 			data_h_select: [],
 		}
 	},
-	methods: {	
+	methods: {
+		reloadData(){
+			axios.post('/api/call-page/get-history', {
+				dataUser: this.$store.state.app.appData.dataUser
+			}).then(response => {
+				console.log(response)
+			})
+		},
 		newContact(){
 			if(this.new_contact.name_full != undefined) return;
 			if(this.mesto_select.length < 4) {this.showAlert('Je potrebne vybrať "Mesto"'); return;}
@@ -201,14 +239,17 @@ export default {
 				dataUser: dataUser,
 				okres: this.mesto_select
 			}).then((response) => {
-				this.new_contact = response.data.newContact				
-				this.phone = this.formatPhone(response.data.newContact.phone)
-				this.cp_contact_count = response.data.cp_contact_count
-				this.stav_select = ''
-				this.datum_akcie = '0000-00-00'
-				this.produkty = []
-				this.poznamka = ''
-				console.log(response.data)
+				if(response.data == 'logout') this.$store.commit('logout')
+				else{
+					this.new_contact = response.data.newContact
+					this.phone = this.formatPhone(response.data.newContact.phone)
+					this.cp_contact_count = response.data.cp_contact_count
+					this.stav_select = ''
+					this.datum_akcie = '0000-00-00'
+					this.produkty = []
+					this.poznamka = ''
+					this.table_items_h = response.data.newContact_h
+				}
 			})
 		},
 		sendCotnact(){
@@ -243,6 +284,7 @@ export default {
 					this.stav_select = ''
 					this.datum_akcie = '0000-00-00'
 					this.produkty = []
+					this.table_items_h = []
 					this.poznamka = ''
 					this.phone = ''
 				}
@@ -371,5 +413,29 @@ export default {
 </script>
 
 <style>
-
+table{
+		border-collapse: collapse;
+	}
+	.table td, th{
+		border: 1px solid #ddd;
+	}
+	.table td, th{		
+		padding: 5px;
+		padding-right: 10px;
+		padding-left: 10px;	
+		border-bottom: 1px solid #ddd;
+	}
+	.table th{
+		background-color: #f2f2f2;
+	}
+	.table tr:hover{
+		background: #f2f2f2;
+	}
+	.text-align-left {
+		text-align: left;
+	}
+	.popText{
+		font-size: 13px;
+		color: #8c8c8c;
+  }
 </style>

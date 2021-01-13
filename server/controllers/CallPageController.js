@@ -203,6 +203,44 @@ class CallPageController {
 	}
 
 	//=======================================================================
+	// getHistory
+	//=======================================================================
+	static getHistory(req, res) {
+		let sql = "SELECT * from call_page"
+		sql += " WHERE id_user = '"+req.body.dataUser.email+"'"
+		sql += " ORDER BY date_upg DESC";
+		sql += " LIMIT 100"
+		let data = []
+		db_1.query(sql, (err, result) => {
+			if(err) {res.send({
+				data: [result],
+				data_h: [],
+				err: err
+			}); return}			
+			data = result
+			let phones = ''
+			for(let i = 0; i < result.length; i++){
+				phones += "'" + result[i].phone + "',"
+			}
+			phones = phones.substring(0, phones.length - 1)
+			sql = "SELECT * FROM call_page_h"
+			sql += " WHERE phone IN ("+phones+")"
+			sql += " ORDER BY date_upg DESC"
+			db_1.query(sql, (err, result) => {
+				if(err) {res.send({
+					data: [result],
+					data_h: [],
+					err: err
+				}); return}	
+				res.send({
+					data: data,
+					data_h: result
+				})
+			})
+		})
+	}
+
+	//=======================================================================
 	// getCustomData
 	//=======================================================================
 	static getCustomData(req, res) {
