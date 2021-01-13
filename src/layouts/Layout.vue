@@ -79,7 +79,8 @@ export default {
 			leftDrawerOpen: false,
 			activeLabel: 'Call-Page',
 			navs: [
-				{ label: 'Call-Page', icon: 'call', to: '/', },
+				{ label: 'Call-Page', icon: 'call', to: '/call-page', },
+				{ label: 'Call-Page (VIP)', icon: 'tty', to: '/call-page-vip', },
 				// { label: 'Todo App', icon: 'list', to: '/todo', },
 				// { label: 'Settings', icon: 'settings', to: '/settings', },
 				{ label: 'Contact', icon: 'contact_support', to: '/contact', },
