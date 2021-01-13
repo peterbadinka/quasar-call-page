@@ -46,10 +46,15 @@ class CallPageController {
 						sql += " LIMIT 1"
 						db_1.query(sql, (err, result) => {
 							if(err) {res.send(err); return}
-							res.send({
-								newContact: newContact,
-								cp_contact_count: cp_contact_count
-							})
+							sql = "SELECT * FROM call_page_h"
+							sql += " WHERE phone = '"+newContact.phone+"'"
+							db_1.query(sql, (err, result) => {							
+								res.send({
+									newContact: newContact,
+									newContact_h: result,
+									cp_contact_count: cp_contact_count
+								})								
+							})							
 						})
 					})
 				})
@@ -57,12 +62,18 @@ class CallPageController {
 			else{
 				sql = "SELECT * FROM call_page"
 				sql += " WHERE id_string = '"+cp_contact_id+"'"
-				sql += " LIMIT 1"
+				sql += " LIMIT 1"				
 				db_1.query(sql, (err, result) => {
 					if(err) {res.send(err); return}
-					res.send({
-						newContact: result[0],
-						cp_contact_count: cp_contact_count
+					newContact = result[0]
+					sql = "SELECT * FROM call_page_h"
+					sql += " WHERE phone = '"+newContact.phone+"'"
+					db_1.query(sql, (err, result) => {
+						res.send({
+							newContact: newContact,
+							newContact_h: result,
+							cp_contact_count: cp_contact_count
+						})						
 					})
 				})
 			}

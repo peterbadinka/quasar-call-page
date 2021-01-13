@@ -1,6 +1,6 @@
 <template>
 	<q-page padding>
-		<div class="row">
+		<div class="row q-mb-md">
 
 			<!-- btn new -->
 			<q-btn label=""
@@ -17,7 +17,7 @@
 		
 			<!-- btn send -->
 			<q-btn label=""
-				type="submit" 
+				type="submit"
 				color="primary" 
 				style="width: 200px;"
 				class="q-mr-md"
@@ -31,25 +31,27 @@
 			<!-- select mesto -->
 			<q-select
 				class=""
-				label="Mesto"			
+				label="Mesto"
 				ref="mesto"
 				transition-show="flip-up"
 				transition-hide="flip-down"
 				filled
 				v-model="mesto_select"
-				:options="options"
+				:options="options_m"
 				style="width: 250px;">
 				<template v-slot:prepend>
 					<q-icon name="place" />
 				</template>
-			</q-select>		
+			</q-select>
 
 		</div>
 		
-			<div class="row text-h4 q-mt-sm">{{ new_contact.name_full }}</div>
-			<div class="row text-h5 q-mb-sm">{{ new_contact.phone }}</div>
+		<div v-if="new_contact.name_full != undefined">
+			<div class="row text-h4">{{ new_contact.name_full }} ({{ cp_contact_count }})</div>
+			<div class="row text-h5">{{ phone }}</div>
+		</div>
 
-		<div class="row">
+		<div class="row q-mt-sm">
 			<!-- select stav  -->
 			<q-select
 				label="Stav"
@@ -63,7 +65,7 @@
 			<!-- datum akcie  -->
 			<q-input 							
 				class=""
-				v-model="datum_akcie" 
+				v-model="datum_akcie"
 				filled 
 				type="date"
 				style="width: 180px">
@@ -72,10 +74,35 @@
 		</div>
 
 		<!-- select products  -->
-		<select-products 
-			:produkty="produkty"
-			@updateProducts="produkty = $event"
-		></select-products>
+		<div class="">
+			<div class="q-mt-xs">
+				<q-select
+						filled
+						v-model="produkty"
+						:options="options"
+						label="Produkty"
+						multiple
+						emit-value
+						map-options
+						style="width: 100%"
+						:value="produkty"
+				>
+					<template v-slot:option="{ itemProps, itemEvents, opt, selected, toggleOption }">
+						<q-item
+							v-bind="itemProps"
+							v-on="itemEvents"
+						>
+							<q-item-section>
+								<q-item-label v-html="opt.label" ></q-item-label>
+							</q-item-section>
+							<q-item-section side>
+								<q-toggle :value="selected" @input="toggleOption(opt)" />
+							</q-item-section>
+						</q-item>
+					</template>
+				</q-select>
+			</div>
+		</div>
 
 		<!-- poznamka  -->
 		<q-input 
@@ -111,7 +138,7 @@
 					<th style="text-align: left;">Dátum</th>
 					<th style="text-align: left;">Meno</th>
 					<th style="text-align: left;">Stav</th>
-					<th style="text-align: left;">Produkty</th>
+					<th style="text-align: left;">produkty</th>
 					<th style="text-align: left;">Poznamka</th>	
 				</tr>
 				<tr 
@@ -143,9 +170,14 @@ export default {
 		return {
 			new_contact: {},
 			new_contact_send: true,
+			cp_contact_count: '',
+			produkty: [],
 
 			mesto_select: '',
-			options: [],
+			options: [
+				{ label: 'Dôchodok - 2. pilier', value: 'Dôchodok - 2. pilier' },{ label: 'Dôchodok - 3. pilier', value: 'Dôchodok - 3. pilier' },{ label: 'Investícia - Podielové fondy', value: 'Investícia - Podielové fondy' },{ label: 'Investícia - Sporiaci účet', value: 'Investícia - Sporiaci účet' },{ label: 'Poistenie - Bytu', value: 'Poistenie - Bytu' },{ label: 'Poistenie - Domácnosti', value: 'Poistenie - Domácnosti' },{ label: 'Poistenie - Domu', value: 'Poistenie - Domu' },{ label: 'Poistenie - Havarijné (HP)', value: 'Poistenie - Havarijné (HP)' },{ label: 'Poistenie - Investičné životné (IŽP)', value: 'Poistenie - Investičné životné (IŽP)' },{ label: 'Poistenie - Kapitalové (KŽP)', value: 'Poistenie - Kapitalové (KŽP)' },{ label: 'Poistenie - Majetku', value: 'Poistenie - Majetku' },{ label: 'Poistenie - Rizikové', value: 'Poistenie - Rizikové' },{ label: 'Poistenie - Úrazové', value: 'Poistenie - Úrazové' },{ label: 'Poistenie - Zákonné (PZP)', value: 'Poistenie - Zákonné (PZP)' },{ label: 'Poistenie - Životné (ŽP)', value: 'Poistenie - Životné (ŽP)' },{ label: 'Úver - Hypotekárny', value: 'Úver - Hypotekárny' },{ label: 'Úver - Leasing', value: 'Úver - Leasing' },{ label: 'Úver - Nebankové pôžičky', value: 'Úver - Nebankové pôžičky' },{ label: 'Úver - Spotrebný', value: 'Úver - Spotrebný' },
+			],
+			options_m: [],
 			selected_item: {
 				name_full: '',
 			},
@@ -155,23 +187,32 @@ export default {
 				'nemá záujem - starobný dôchodca','kontaktovať inokedy','dohodnuté stretnutie',
 				'nekontaktovať','nekontaktovať - osobný blacklist','potenciálny pohovor','klient'],
 			table_items: [],
-			datum_akcie: '',
-			produkty: '',
+			datum_akcie: '',			
 			poznamka: '',
 			data_h_select: [],
 		}
 	},
-	methods: {
+	methods: {	
 		newContact(){
+			if(this.new_contact.name_full != undefined) return;
+			if(this.mesto_select.length < 4) {this.showAlert('Je potrebne vybrať "Mesto"'); return;}
 			let dataUser = this.$store.state.app.appData.dataUser
 			axios.post('https://app-44.herokuapp.com/api/call-page/new-contact', {
 				dataUser: dataUser,
 				okres: this.mesto_select
 			}).then((response) => {
-				this.new_contact = response.data.newContact
+				this.new_contact = response.data.newContact				
+				this.phone = this.formatPhone(response.data.newContact.phone)
+				this.cp_contact_count = response.data.cp_contact_count
+				this.stav_select = ''
+				this.datum_akcie = '0000-00-00'
+				this.produkty = []
+				this.poznamka = ''
+				console.log(response.data)
 			})
 		},
 		sendCotnact(){
+			if(this.new_contact.name_full == undefined) return;
 			if(this.stav_select == ""){
 				this.showAlert('Je potrebné vybrať "Stav".')
 				return false
@@ -198,8 +239,12 @@ export default {
 				}
 			}).then((response) => {				
 				if(response.data == true){
-					// this.reloadData()
-					// this.dialogShow = false
+					this.new_contact = {}
+					this.stav_select = ''
+					this.datum_akcie = '0000-00-00'
+					this.produkty = []
+					this.poznamka = ''
+					this.phone = ''
 				}
 				else this.showAlert('Error...')
 			})
@@ -223,7 +268,7 @@ export default {
 		saveChange(){
 
 		},
-//=======================================================================
+		//=======================================================================
 		// format date dd.mm.yyyy
 		//=======================================================================
 		dateToDMY(date) {
@@ -314,7 +359,7 @@ export default {
 		let string = this.$store.state.app.appData.dataUser.cp_mesta
 		string = string.replace(/'/gi, "");
 		let array = string.split(",")		
-		this.options = array
+		this.options_m = array
 		this.$nextTick(() => {
 			this.$refs.mesto.focus()
 		});
