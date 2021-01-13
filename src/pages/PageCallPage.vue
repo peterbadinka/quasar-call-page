@@ -190,7 +190,7 @@
 
 						<select-products 
 							:produkty="produkty"
-							@updateProducts="updateProducts"
+							@updateProducts="produkty = $event"
 						></select-products>
 
 						<q-input 
@@ -372,9 +372,6 @@ export default {
 					this.data_h_select.push(this.data_h[i])
 				}
 			}
-		},
-		updateProducts(val){
-			this.produkty = val
 		},
 		//=======================================================================
 		// format date dd.mm.yyyy
