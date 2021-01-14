@@ -4,14 +4,14 @@ export default {
 			access: false,
 			userName: '',  
 			key_api: '',
+			mestoSelect: '',
 			dataUser: []
 		}
 	},
-	mutations: {
-		changeMsg(state, msg) {			
-			state.msg = msg
-			console.log("store-test")			
-		},
+	mutations: {	
+		updateMestoSelect(state, payload) {
+			state.appData.mestoSelect = payload
+		},	
 		login(state, payload) {
 			state.appData = payload;
 		},

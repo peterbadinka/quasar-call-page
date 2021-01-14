@@ -36,8 +36,9 @@
 				transition-show="flip-up"
 				transition-hide="flip-down"
 				filled
-				v-model="mesto_select"
+				v-model="mesto_select"				
 				:options="options_m"
+				@input="selectMesto()"
 				style="width: 250px;">
 				<template v-slot:prepend>
 					<q-icon name="place" />
@@ -578,16 +579,25 @@ export default {
 			p += str[8]
 			p += str[9]
 			return p
-		}
+		},
+		selectMesto(){
+			this.$store.commit('updateMestoSelect', this.mesto_select)
+			this.reloadData()
+		},
 	},
 	mounted(){
 		let string = this.$store.state.app.appData.dataUser.cp_mesta
 		string = string.replace(/'/gi, "");
 		let array = string.split(",")		
 		this.options_m = array
-		this.$nextTick(() => {
-			this.$refs.mesto.focus()
-		});
+		let storeMesto = this.$store.state.app.appData.mestoSelect
+		if(storeMesto != undefined){
+			this.mesto_select = storeMesto
+		}else{
+			this.$nextTick(() => {
+				this.$refs.mesto.focus()
+			});
+		}
 	},
 	components: {
 		
