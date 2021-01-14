@@ -328,8 +328,8 @@ export default {
 			}
 			Loading.show({ spinner: QSpinnerGears })
 			let dataUser = this.$store.state.app.appData.dataUser
-			axios.post("https://app-44.herokuapp.com/api/call-page/custom-data", {
-			// axios.post("/api/call-page/custom-data", {
+			// axios.post("https://app-44.herokuapp.com/api/call-page/custom-data", {
+			axios.post("/api/call-page/custom-data", {
 				dataUser: dataUser,
 				dataContact: {
 					mesta: this.mesto_select,

@@ -244,7 +244,7 @@ class CallPageController {
 	// getCustomData
 	//=======================================================================
 	static getCustomData(req, res) {		
-		let minTel = 100 //minimum telefonatov
+		let minTel = 10 //minimum telefonatov
 
 		let sql = "SELECT cp_contact_count FROM users"
 		sql += " WHERE email = '"+req.body.dataUser.email+"'"
@@ -266,7 +266,8 @@ class CallPageController {
 				let search_1 = req.body.dataContact.searchString;
 				if(search_1.length > 0){
 					sql += " AND (poznamka LIKE '%"+search_1+"%'"
-					sql += " OR produkt LIKE '%"+search_1+"%')"
+					sql += " OR produkt LIKE '%"+search_1+"%'"
+					sql += " OR stav LIKE '%"+search_1+"%')"
 				}		
 		
 				let search_2 = req.body.dataContact.searchString_2;
