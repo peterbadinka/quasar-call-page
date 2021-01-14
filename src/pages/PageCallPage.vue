@@ -164,29 +164,29 @@
 				<!-- select sta  -->
 				<!-- =================================================================== -->
         <q-card-section class="q-pt-none">
-					<div class="text-h4 q-mt-md">{{ selected_item.name_full }}</div>
+					<div class="text-h4 q-mt-sm">{{ selected_item.name_full }}</div>
 					<div v-if="selected_item" class="text-h5">{{ phone }}</div>				
 
-						<!-- =================================================================== -->
-						<!-- select sta  -->
-						<!-- =================================================================== -->
-						<div class="q-pr-md q-mt-xs">
+						<!-- stav, datum akcie -->
+						<div class="row q-mt-sm">	
+
 							<q-select
 								label="Stav"
 								filled
 								v-model="stav_select"
 								:options="stav_opt"
-								style="width: 527px">
-							</q-select>
-						</div>		
+								style="width: 300px">
+							</q-select>					
 
-						<q-input 							
-							class="q-mt-xs"
-							v-model="datum_akcie" 
-							filled 
-							type="date"
-							style="width: 180px">
-						</q-input>			
+							<q-input 							
+								class="q-ml-xs"
+								v-model="datum_akcie" 
+								filled 
+								type="date"
+								style="width: 160px">
+							</q-input>	
+
+						</div>		
 
 						<select-products 
 							:produkty="produkty"
@@ -197,7 +197,7 @@
 							class="q-mt-xs"
 							label="Poznamky"
 							v-model="poznamka" 
-							filled 
+							filled 							
 							type="textarea"
 							style="width: 100%">
 						</q-input>		
@@ -208,22 +208,19 @@
 							style="width: 150px; height: 35px;"
 							@click="saveChange"
 							class="q-mt-xs q-md-xs">		
-						</q-btn>	
+						</q-btn>
 
-						<!-- =================================================================== -->
 						<!-- historia -->
-						<!-- =================================================================== -->
-						<table class="table q-mt-md q-mb-md" v-if="data_h_select.length > 0">	
-							<tr 
-								v-for="(item, index) in data_h_select"
-								:key="index">
-								<td>{{ dateToDMY_hhmm(item.date_upg) }}</td>
-								<td>{{ item.id_user }}</td>
-								<td>{{ item.stav }}</td>
-								<td>{{ item.produkt }}</td>
-								<td>{{ item.poznamka }}</td>
-							</tr>							
-						</table>								
+						<div v-if="data_h_select.length > 0">
+							<div							
+								v-for="(item, index) in data_h_select"				
+								:key="index">												
+								<div style="width: 30%; min-width: 450px;"><hr></div>
+								<div>{{ dateToDMY_hhmm(item.date_upg) }}, {{ item.id_user }}, <b>{{ item.stav }}</b></div>
+								<div v-if="item.produkt"><b>Produkty: </b>{{ item.produkt }}</div>
+								<div v-if="item.poznamka"><b>Poznámky: </b>{{ item.poznamka }}</div>
+							</div>
+						</div>
 					
         </q-card-section>
       </q-card>
@@ -332,6 +329,7 @@ export default {
 			Loading.show({ spinner: QSpinnerGears })
 			let dataUser = this.$store.state.app.appData.dataUser
 			axios.post("https://app-44.herokuapp.com/api/call-page/custom-data", {
+			// axios.post("/api/call-page/custom-data", {
 				dataUser: dataUser,
 				dataContact: {
 					mesta: this.mesto_select,
@@ -344,7 +342,11 @@ export default {
 				if(response.data == 'logout'){
 					this.$store.commit('logout')
 				}
-				else {					
+				else if(response.data == '<>'){
+					this.showAlert('Na pužitie tejto sekcie nie sú splnené podmienky.')
+					return
+				}
+				else {				
 					this.data_h = []
 					this.table_items = []
 					this.table_items = response.data.data

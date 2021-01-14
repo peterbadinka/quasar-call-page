@@ -243,60 +243,73 @@ class CallPageController {
 	//=======================================================================
 	// getCustomData
 	//=======================================================================
-	static getCustomData(req, res) {
+	static getCustomData(req, res) {		
+		let minTel = 100 //minimum telefonatov
 
-		let sql = "SELECT * FROM call_page"
-		sql += " WHERE okres = '"+req.body.dataContact.mesta+"'"
-		sql += " AND stav != 'nemá záujem - starobný dôchodca'"
-		sql += " AND stav != 'číslo neexistuje'"
-		sql += " AND stav != 'klient'"
-		sql += " AND stav != 'nekontaktovať'"
-		sql += " AND blacklist NOT LIKE '%"+req.body.dataUser.email+"%'"
-
-		let search_1 = req.body.dataContact.searchString;
-		if(search_1.length > 0){
-			sql += " AND (poznamka LIKE '%"+search_1+"%'"
-			sql += " OR produkt LIKE '%"+search_1+"%')"
-		}		
-
-		let search_2 = req.body.dataContact.searchString_2;
-		if(search_2.length > 0){
-			sql += " AND name_full LIKE '%"+search_2+"%'"
-		}
-
-		let search_3 = req.body.dataContact.searchString_3;
-		if(search_3.length > 0){			
-			sql += " AND phone LIKE '%"+Tools.formatPhone(search_3)+"%'"
-		}
-
-		sql += " ORDER BY date_upg"
-		sql += " LIMIT " + req.body.dataUser.app_max_rows
-		
+		let sql = "SELECT cp_contact_count FROM users"
+		sql += " WHERE email = '"+req.body.dataUser.email+"'"
 		db_1.query(sql, (err, result) => {
-			if(err) res.send(err)
-			
-			if(result.length > 0){
+			if(err) {res.send(err); return}
+			if(result[0].cp_contact_count < minTel){
+				res.send('<>'); return;				
+			}
+			else{
 
-				let phones = ''
-				for(let i = 0; i < result.length; i++){
-					phones += "'" + result[i].phone + "',"
+				sql = "SELECT * FROM call_page"
+				sql += " WHERE okres = '"+req.body.dataContact.mesta+"'"
+				sql += " AND stav != 'nemá záujem - starobný dôchodca'"
+				sql += " AND stav != 'číslo neexistuje'"
+				sql += " AND stav != 'klient'"
+				sql += " AND stav != 'nekontaktovať'"
+				sql += " AND blacklist NOT LIKE '%"+req.body.dataUser.email+"%'"
+		
+				let search_1 = req.body.dataContact.searchString;
+				if(search_1.length > 0){
+					sql += " AND (poznamka LIKE '%"+search_1+"%'"
+					sql += " OR produkt LIKE '%"+search_1+"%')"
+				}		
+		
+				let search_2 = req.body.dataContact.searchString_2;
+				if(search_2.length > 0){
+					sql += " AND name_full LIKE '%"+search_2+"%'"
 				}
-				phones = phones.substring(0, phones.length - 1)
-	
-				sql = "SELECT * FROM call_page_h"
-				sql += " WHERE phone IN ("+phones+")"
-				sql += " ORDER BY date_upg DESC"
-	
-				let data = result;
+		
+				let search_3 = req.body.dataContact.searchString_3;
+				if(search_3.length > 0){			
+					sql += " AND phone LIKE '%"+Tools.formatPhone(search_3)+"%'"
+				}
+		
+				sql += " ORDER BY date_upg"
+				sql += " LIMIT " + req.body.dataUser.app_max_rows
+				
 				db_1.query(sql, (err, result) => {
 					if(err) res.send(err)
-					res.send({data: data, data_h: result})
+					
+					if(result.length > 0){
+		
+						let phones = ''
+						for(let i = 0; i < result.length; i++){
+							phones += "'" + result[i].phone + "',"
+						}
+						phones = phones.substring(0, phones.length - 1)
+			
+						sql = "SELECT * FROM call_page_h"
+						sql += " WHERE phone IN ("+phones+")"
+						sql += " ORDER BY date_upg DESC"
+			
+						let data = result;
+						db_1.query(sql, (err, result) => {
+							if(err) res.send(err)
+							res.send({data: data, data_h: result})
+						})
+		
+					} else {
+						res.send({data: []})
+					}			
+		
 				})
 
-			} else {
-				res.send({data: []})
-			}			
-
+			}
 		})		
 	}
 
