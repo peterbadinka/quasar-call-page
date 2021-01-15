@@ -2,7 +2,8 @@
 	<div class="">
     <div class="q-mt-xs">
       <q-select
-          filled
+          outlined
+					use-chips
           v-model="model"
           :options="options"
           label="Produkty"

@@ -38,7 +38,7 @@
 				ref="mesto"
         transition-show="flip-up"
         transition-hide="flip-down"
-        filled
+        outlined
         v-model="mesto_select"
         :options="options"
 				@input="selectMesto()"
@@ -54,7 +54,7 @@
 		<!-- =================================================================== -->
 		<div class="q-gutter-md row items-start q-mr-md">
 			<q-input 
-				filled
+				outlined
 				v-model="searchString"
 				label="Produkt"
 				:dense="dense"
@@ -72,7 +72,7 @@
 		<!-- =================================================================== -->
 		<div class="q-gutter-md row items-start q-mr-md">
 			<q-input 
-				filled bottom-slots 
+				outlined bottom-slots 
 				v-model="searchString_2" 
 				label="Meno"
 				:dense="dense"
@@ -90,7 +90,7 @@
 		<!-- =================================================================== -->
 		<div class="q-gutter-md row items-start">
 			<q-input 
-				filled bottom-slots v-model="searchString_3" 
+				outlined bottom-slots v-model="searchString_3" 
 				label="Mobil"
 				@keyup.enter="reloadData"
 				:dense="dense"				
@@ -172,7 +172,7 @@
 
 							<q-select
 								label="Stav"
-								filled
+								outlined
 								v-model="stav_select"
 								:options="stav_opt"
 								style="width: 300px">
@@ -181,7 +181,7 @@
 							<q-input 							
 								class="q-ml-xs"
 								v-model="datum_akcie" 
-								filled 
+								outlined 
 								type="date"
 								style="width: 160px">
 							</q-input>	
@@ -197,7 +197,7 @@
 							class="q-mt-xs"
 							label="Poznamky"
 							v-model="poznamka" 
-							filled 							
+							outlined 							
 							type="textarea"
 							style="width: 100%">
 						</q-input>		
@@ -328,8 +328,8 @@ export default {
 			}
 			Loading.show({ spinner: QSpinnerGears })
 			let dataUser = this.$store.state.app.appData.dataUser
-			// axios.post("https://app-44.herokuapp.com/api/call-page/custom-data", {
-			axios.post("/api/call-page/custom-data", {
+			axios.post("https://app-44.herokuapp.com/api/call-page/custom-data", {
+			// axios.post("/api/call-page/custom-data", {
 				dataUser: dataUser,
 				dataContact: {
 					mesta: this.mesto_select,
@@ -478,7 +478,7 @@ export default {
 			this.$nextTick(() => {
 				this.$refs.mesto.focus()
 			});
-		}		
+		}
 	},
 	//===================================================================================================
 	// components

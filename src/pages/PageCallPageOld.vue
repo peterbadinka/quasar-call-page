@@ -35,7 +35,7 @@
 				ref="mesto"
 				transition-show="flip-up"
 				transition-hide="flip-down"
-				filled
+				outlined
 				v-model="mesto_select"				
 				:options="options_m"
 				@input="selectMesto()"
@@ -58,7 +58,7 @@
 
 			<q-select
 				label="Stav"
-				filled
+				outlined
 				v-model="stav_select"
 				:options="stav_opt"
 				class="q-mr-xs"
@@ -68,7 +68,7 @@
 			<q-input 							
 				class=""
 				v-model="datum_akcie"
-				filled 
+				outlined 
 				type="date"
 				style="width: 180px">
 			</q-input>
@@ -79,7 +79,8 @@
 		<div class="">
 			<div class="q-mt-xs">
 				<q-select
-						filled
+						outlined
+						use-chips
 						v-model="produkty"
 						:options="options"
 						label="Produkty"
@@ -111,7 +112,7 @@
 			class="q-mt-xs"
 			label="Poznamky"
 			v-model="poznamka" 
-			filled 
+			outlined 
 			type="textarea"
 			style="width: 100%">
 		</q-input>
@@ -228,7 +229,7 @@
 
 							<q-select
 								label="Stav"
-								filled
+								outlined
 								v-model="dataCall.stav"
 								:options="stav_opt"
 								class="q-mr-xs"
@@ -238,7 +239,7 @@
 							<q-input 							
 								class=""
 								v-model="dataCall.date_akcia"
-								filled 
+								outlined 
 								type="date"
 								style="width: 160px">
 							</q-input>
@@ -249,7 +250,8 @@
 						<div class="">
 							<div class="q-mt-xs">
 								<q-select
-										filled
+										outlined
+										use-chips
 										v-model="dataCallProdukty"
 										:options="options"
 										label="Produkty"
@@ -281,7 +283,7 @@
 							class="q-mt-xs"
 							label="Poznamky"
 							v-model="dataCallPoznamka" 
-							filled 
+							outlined 
 							type="textarea"
 							style="width: 100%">
 						</q-input>
