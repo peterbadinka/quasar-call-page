@@ -272,13 +272,14 @@ class CallPageController {
 		
 				let search_2 = req.body.dataContact.searchString_2;
 				if(search_2.length > 0){
-					sql += " AND name_full LIKE '%"+search_2+"%'"
+					sql += " AND (name_full LIKE '%"+search_2+"%'"
+					sql += " OR phone LIKE '%"+search_2+"%')"
 				}
 		
-				let search_3 = req.body.dataContact.searchString_3;
-				if(search_3.length > 0){			
-					sql += " AND phone LIKE '%"+Tools.formatPhone(search_3)+"%'"
-				}
+				// let search_3 = req.body.dataContact.searchString_3;
+				// if(search_3.length > 0){			
+				// 	sql += " AND phone LIKE '%"+Tools.formatPhone(search_3)+"%'"
+				// }
 		
 				sql += " ORDER BY date_upg"
 				sql += " LIMIT " + req.body.dataUser.app_max_rows

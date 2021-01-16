@@ -56,7 +56,7 @@
 			<q-input 
 				outlined
 				v-model="searchString"
-				label="Produkt"
+				label="Produkt/Stav"
 				:dense="dense"
 				@keyup.enter="reloadData"
 				style="width: 200px">
@@ -74,7 +74,7 @@
 			<q-input 
 				outlined bottom-slots 
 				v-model="searchString_2" 
-				label="Meno"
+				label="Meno/Mobil"
 				:dense="dense"
 				@keyup.enter="reloadData"
 				style="width: 200px">
@@ -86,9 +86,9 @@
 		</div>
 
 		<!-- =================================================================== -->
-		<!-- input search -->
+		<!-- input search, class = hide -->
 		<!-- =================================================================== -->
-		<div class="q-gutter-md row items-start">
+		<div class="q-gutter-md row items-start hide">
 			<q-input 
 				outlined bottom-slots v-model="searchString_3" 
 				label="Mobil"
@@ -516,4 +516,7 @@ export default {
 		font-size: 13px;
 		color: #8c8c8c;
   }
+	.hide {
+		display: none;
+	}
 </style>

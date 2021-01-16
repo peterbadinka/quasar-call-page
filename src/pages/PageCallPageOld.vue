@@ -144,17 +144,33 @@
 			</div>
 		</div>
 
-		<!-- =================================================================== -->
-		<!-- btn reload -->
-		<!-- =================================================================== -->
-		<q-btn label=""
-			type="submit" 
-			color="primary" 
-			style="width: 54px; height: 54px;"
-			@click="reloadData"
-			class="q-mt-sm q-mb-xs">
-			<q-icon name="cached" />
-		</q-btn>
+		<div class="row q-mt-md q-mb-xs">
+			<!-- =================================================================== -->
+			<!-- btn reload -->
+			<!-- =================================================================== -->
+			<q-btn label=""
+				type="submit" 
+				color="primary" 
+				style="width: 54px; height: 54px;"
+				@click="reloadData"
+				class="">
+				<q-icon name="cached" />
+			</q-btn>
+
+			<!-- input search -->
+			<q-input 
+					outlined 	
+					v-model="search" 
+					label="Vyhľadať"
+					class="q-ml-sm"
+					style="width: 400px;"
+					v-if="call_h.length > 0">
+
+					<template v-slot:prepend>
+						<q-icon name="search" />
+					</template>
+			</q-input>
+		</div>
 
 		<!-- =================================================================== -->
 		<!-- table / historia volani -->
@@ -164,24 +180,24 @@
 				<tr>
 					<th style="text-align: left;">Dátum</th>
 					<th style="text-align: left;">Meno</th>
-					<th style="text-align: left;">Mobil</th>
+					<th style="text-align: left;" class="hide">Mobil</th>
 					<th style="text-align: left;">Stav</th>
 					<th style="text-align: left;">Produkty</th>
 					<th style="text-align: left;">Poznamka</th>
 					<th style="text-align: left;">Mesto</th>	
 				</tr>
 				<tr 
-					v-for="(item, index) in call_h"				
-					:key="index"					
-					@click="selectItem(item)">
+					v-for="row in rows"
+					:key="row.id_string"
+					@click="selectItem(row)">
 
-					<td>{{ dateToDMY(item.date_upg) }}</td>
-					<td>{{ item.name_full }}</td>
-					<td>{{ item.phone }}</td>
-					<td>{{ item.stav }}</td>
-					<td>{{ item.produkt }}</td>
-					<td>{{ item.poznamka }}</td>
-					<td>{{ item.okres }}</td>
+					<td>{{ dateToDMY(row.date_upg) }}</td>
+					<td>{{ row.name_full }}</td>
+					<td class="hide">{{ row.phone }}</td>
+					<td>{{ row.stav }}</td>
+					<td>{{ row.produkt }}</td>
+					<td>{{ row.poznamka }}</td>
+					<td>{{ row.okres }}</td>
 				</tr>
 			</table>
 			<div class="popText">Počet riadkov: {{ call_h.length }}</div>
@@ -357,9 +373,27 @@ export default {
 			dataCallHistSelect: [],
 			dataCallPhone: [],
 			dataCallProdukty: [],
-			dataCallPoznamka: ''
+			dataCallPoznamka: '',
+
+			search: null,
+			column: null,
+			items: [],
 		}
 	},
+	computed: {
+    cols () {
+      return this.call_h.length >= 1 ? Object.keys(this.call_h[0]) : []
+    },
+    rows () {
+      if (!this.call_h.length) {
+        return []
+      }
+      return this.call_h.filter(item => {
+        let props = Object.values(item)
+        return props.some(prop => !this.search || ((typeof prop === 'string') ? prop.includes(this.search) : prop.toString(10).includes(this.search)))
+      })
+    }
+  },
 	methods: {
 		reloadData(){
 			Loading.show({ spinner: QSpinnerGears })
@@ -633,4 +667,7 @@ table{
 		font-size: 13px;
 		color: #8c8c8c;
   }
+	.hide {
+		display: none;
+	}
 </style>
