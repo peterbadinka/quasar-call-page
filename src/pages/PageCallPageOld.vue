@@ -414,7 +414,10 @@ export default {
 				dataUser: dataUser,
 				okres: this.mesto_select
 			}).then((response) => {
-				if(response.data == 'logout') this.$store.commit('logout')
+				if(response.data == 'logout'){
+					Loading.hide()
+					this.$store.commit('logout')
+				}				 
 				else{
 					this.new_contact = response.data.newContact
 					this.phone = this.formatPhone(response.data.newContact.phone)
@@ -454,7 +457,8 @@ export default {
 					produkt: this.produkty,
 					poznamka: this.poznamka
 				}
-			}).then((response) => {				
+			}).then((response) => {	
+				Loading.hide()
 				if(response.data == true){
 					this.new_contact = {}
 					this.stav_select = ''
