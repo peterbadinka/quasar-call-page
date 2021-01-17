@@ -18,5 +18,8 @@ export default {
 		logout(state) {
 			state.appData.access = false;
 		}
+	},
+	getters: {
+
 	}
 }

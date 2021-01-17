@@ -78,10 +78,11 @@ export default {
     return {
 			leftDrawerOpen: true,
 			activeLabel: 'Call-Page',
-			navs: [
+			navs: [				
 				{ label: 'Call-Page', icon: 'call', to: '/', },
-				{ label: 'Call-Page (VIP)', icon: 'phone_locked', to: '/call-page', },
-				{ label: 'Contact', icon: 'contact_support', to: '/contact', },			
+				{ label: 'Call-Page (VIP)', icon: 'phone_locked', to: '/call-page-vip', },
+				// { label: 'Databáza', icon: 'folder', to: '/databaza', },
+				{ label: 'Contact', icon: 'contact_support', to: '/contact', },	
 				// { label: 'Todo App', icon: 'list', to: '/todo', },
 				// { label: 'Settings', icon: 'settings', to: '/settings', },				
 				// { label: 'Test', icon: 'extension', to: '/test', },

@@ -1,16 +1,15 @@
 export default {
 	state: {
-		callPageData: {
-			showDialog: false
+		appData: {
+			xD: 'xD'
 		}
 	},
 	mutations: {
-		showDialog(state) {
-			state.showDialog = !state.showDialog
-			console.log("showDialog(state)")			
-		},
-		login(state, payload) {
-			state.appData = payload;
+		
+	},
+	getters: {
+		getAll: state => {
+			return state
 		}
 	}
 }

@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import tasks from './store-tasks'
 import app from './store-app'
+import databaza from './store-databaza'
+import callPage from './store-call'
+import tasks from './store-tasks'
 
 Vue.use(Vuex)
 
@@ -17,9 +19,11 @@ Vue.use(Vuex)
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
-    modules: {			
+    modules: {
+			app,
+			databaza,	
+			callPage,
 			tasks,
-			app,	
     },
 
     // enable strict mode (adds overhead!)
