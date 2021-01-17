@@ -3,6 +3,7 @@ const Tools = require ('../Tools')
 
 class DatabazaController {	
 
+	// getContacts
 	static getContacts(req, res) {
 		let sql = "SELECT * FROM main_db"
 		sql += " WHERE id_user = '"+req.body.dataUser.email+"'"
@@ -35,6 +36,45 @@ class DatabazaController {
 			});
 		})
 	
+	}
+
+	// setContact
+	static setContact(req, res) {
+		let data = req.body.dataContact
+		let sql = "UPDATE main_db SET"
+		for (var key in data) {
+			if (data.hasOwnProperty(key)) {
+				sql += " "+key+" = '"+data[key]+"',"
+			}
+		}
+		sql = sql.substring(0, sql.length - 1)
+		sql += " WHERE id_person = '"+data.id_person+"'"
+		sql += " LIMIT 1"	
+		db_1.query(sql, (err, response) => {
+			res.send({
+				err: err,
+				data: response
+			})
+		})
+	}
+	// deleteContact
+	static deleteContact(req, res) {
+		let data = req.body.dataContact
+		let sql = "UPDATE main_db SET"
+		for (var key in data) {
+			if (data.hasOwnProperty(key)) {
+				sql += " "+key+" = '"+data[key]+"',"
+			}
+		}
+		sql = sql.substring(0, sql.length - 1)
+		sql += " WHERE id_person = '"+data.id_person+"'"
+		sql += " LIMIT 1"	
+		db_1.query(sql, (err, response) => {
+			res.send({
+				err: err,
+				data: response
+			})
+		})
 	}
 
 }

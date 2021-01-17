@@ -1,13 +1,13 @@
 <template>
-	<q-page padding>
-		<div class="row q-mb-md">
+	<q-page class="q-pa-sm">
+		<div class="row q-mb-sm">
 
 			<!-- btn new -->
 			<q-btn label=""
 				type="submit" 
 				color="primary" 
 				style="width: 200px"
-				class="q-mr-md"
+				class="q-mr-sm"
 				@click="newContact">
 				<div class="row">
 					<q-icon name="get_app" class="q-pr-sm" />
@@ -20,13 +20,15 @@
 				type="submit"
 				color="primary" 
 				style="width: 200px;"
-				class="q-mr-md"
+				class="q-mr-sm"
 				@click="sendCotnact">
 				<div class="row">
 					<q-icon name="send" class="q-pr-sm" />
 					Odoslať kontakt
 				</div>				
 			</q-btn>	
+
+			<q-space />
 
 			<!-- select mesto -->
 			<q-select
@@ -119,7 +121,7 @@
 
 		<!-- historia -->		
 		<div class="row">			
-			<table class="table q-mt-md q-mb-md" v-if="data_h_select.length > 0">	
+			<table class="table q-mt-md" v-if="data_h_select.length > 0">	
 				<tr 
 					v-for="(item, index) in data_h_select"
 					:key="index">
@@ -133,7 +135,7 @@
 		</div>		
 
 		<!-- historia -->
-		<div v-if="table_items_h.length > 0">
+		<div v-if="table_items_h.length > 0" class="q-mt-md">
 			<div							
 				v-for="(item, index) in table_items_h"				
 				:key="index">												
@@ -206,16 +208,20 @@
 		<!-- =================================================================== -->
 		<!-- dialog edit -->
 		<!-- =================================================================== -->
-		<div class="q-pa-md q-gutter-sm">
+		<div class="q-pa-sm q-gutter-sm">
 
 			<q-dialog
+				persistent
 				v-model="dialogEdit"
 				:maximized="maximizedToggle"
-				transition-show="slide-up"
-				transition-hide="slide-down"
 			>
 				<q-card>
 					<q-bar class="bg-primary text-white">
+
+						<q-btn dense flat icon="save" class="" label="Uložiť" @click="saveChange()">
+							<q-tooltip content-class="bg-white text-white bg-green">Uložiť</q-tooltip>
+						</q-btn>
+
 						<q-space />
 
 						<q-btn dense flat icon="minimize" @click="maximizedToggle = false" :disable="!maximizedToggle">
@@ -304,13 +310,13 @@
 							style="width: 100%">
 						</q-input>
 
-						<q-btn label="Uložiť"
+						<!-- <q-btn label="Uložiť"
 							type="submit" 
 							color="primary" 
 							style="width: 150px; height: 35px;"
-							@click="saveChange"
+							@click="saveChange()"
 							class="q-mt-xs q-md-xs">		
-						</q-btn>
+						</q-btn> -->
 
 						<!-- historia -->
 						<div v-if="dataCallHistSelect.length > 0">
@@ -646,7 +652,7 @@ export default {
 </script>
 
 <style>
-table{
+	table{
 		border-collapse: collapse;
 	}
 	.table td, th{

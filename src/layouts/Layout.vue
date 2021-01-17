@@ -10,7 +10,7 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-
+				
         <q-toolbar-title>
           {{ activeLabel }}
         </q-toolbar-title>
@@ -45,7 +45,7 @@
 
 				<q-item 
 					v-for="nav in navs" 
-					:key="nav.to"					
+					:key="nav.to"
 					:to="nav.to"
 					exact
 					@click="activeLabel = nav.label"
@@ -81,8 +81,8 @@ export default {
 			navs: [				
 				{ label: 'Call-Page', icon: 'call', to: '/', },
 				{ label: 'Call-Page (VIP)', icon: 'phone_locked', to: '/call-page-vip', },
-				// { label: 'Databáza', icon: 'folder', to: '/databaza', },
-				{ label: 'Contact', icon: 'contact_support', to: '/contact', },	
+				// { label: 'Databáza (Lite)', icon: 'folder_shared', to: '/databaza', },
+				// { label: 'Contact', icon: 'contact_support', to: '/contact', },	
 				// { label: 'Todo App', icon: 'list', to: '/todo', },
 				// { label: 'Settings', icon: 'settings', to: '/settings', },				
 				// { label: 'Test', icon: 'extension', to: '/test', },

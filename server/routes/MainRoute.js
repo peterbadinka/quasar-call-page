@@ -15,7 +15,10 @@ Route.post('/api/call-page/new-contact', [jsonParser, Auth.key_api], CallPageCon
 Route.post('/api/call-page/update-new', jsonParser, CallPageController.updateNew)
 Route.post('/api/call-page/get-history', jsonParser, CallPageController.getHistory)
 Route.post('/api/call-page/update', jsonParser, CallPageController.update)
+
 Route.post('/api/databaza/get-contacts', [jsonParser, Auth.key_api], DatabazaController.getContacts)
+Route.post('/api/databaza/set-contact', [jsonParser, Auth.key_api], DatabazaController.setContact)
+Route.post('/api/databaza/delete-contact', [jsonParser, Auth.key_api], DatabazaController.deleteContact)
 
 
 module.exports = Route;

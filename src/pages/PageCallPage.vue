@@ -1,5 +1,5 @@
 <template>
-<q-page padding>
+<q-page class="q-pa-sm">
 		
 	<div class="row">
 		
@@ -11,7 +11,7 @@
 			color="primary" 
 			style="width: 54px; height: 54px;"
 			@click="reloadData"
-			class="q-mr-md">
+			class="q-mr-sm">
 			<q-icon name="cached" />
 		</q-btn>
 
@@ -25,34 +25,14 @@
 			color="primary" 
 			style="width: 54px; height: 54px;"
 			@click="reloadData"
-			class="q-mr-md">
+			class="q-mr-sm">
 			<q-icon name="add" />
 		</q-btn>
 
 		<!-- =================================================================== -->
-		<!-- select mesto -->
-		<!-- =================================================================== -->
-		<div class="q-pr-md">
-			<q-select
-				label="Mesto"			
-				ref="mesto"
-        transition-show="flip-up"
-        transition-hide="flip-down"
-        outlined
-        v-model="mesto_select"
-        :options="options"
-				@input="selectMesto()"
-        style="width: 250px">
-				<template v-slot:prepend>
-					<q-icon name="place" />
-				</template>
-			</q-select>
-		</div>	
-
-		<!-- =================================================================== -->
 		<!-- input search -->
 		<!-- =================================================================== -->
-		<div class="q-gutter-md row items-start q-mr-md">
+		<div class="q-gutter-md row items-start q-mr-sm">
 			<q-input 
 				outlined
 				v-model="searchString"
@@ -70,9 +50,9 @@
 		<!-- =================================================================== -->
 		<!-- input search -->
 		<!-- =================================================================== -->
-		<div class="q-gutter-md row items-start q-mr-md">
+		<div class="q-gutter-sm row items-start q-mb-sm">
 			<q-input 
-				outlined bottom-slots 
+				outlined
 				v-model="searchString_2" 
 				label="Meno/Mobil"
 				:dense="dense"
@@ -90,7 +70,8 @@
 		<!-- =================================================================== -->
 		<div class="q-gutter-md row items-start hide">
 			<q-input 
-				outlined bottom-slots v-model="searchString_3" 
+				outlined
+				v-model="searchString_3" 
 				label="Mobil"
 				@keyup.enter="reloadData"
 				:dense="dense"				
@@ -101,6 +82,28 @@
 				</template>
 			</q-input>			
 		</div>
+
+		<q-space />
+
+		<!-- =================================================================== -->
+		<!-- select mesto -->
+		<!-- =================================================================== -->
+		<div class="q-pl-sm">
+			<q-select
+				label="Mesto"			
+				ref="mesto"
+        transition-show="flip-up"
+        transition-hide="flip-down"
+        outlined
+        v-model="mesto_select"
+        :options="options"
+				@input="selectMesto()"
+        style="width: 250px">
+				<template v-slot:prepend>
+					<q-icon name="place" />
+				</template>
+			</q-select>
+		</div>	
 
 	</div>
 
@@ -140,13 +143,17 @@
     <!-- <q-btn label="Maximized" color="primary" @click="dialogShow = true" /> -->
 
     <q-dialog
+			persistent
       v-model="dialogShow"
       :maximized="maximizedToggle"
-      transition-show="slide-up"
-      transition-hide="slide-down"
     >
       <q-card class="">
         <q-bar class="bg-primary text-white">
+
+					<q-btn dense flat icon="save" class="" label="Uložiť" @click="saveChange()">
+						<q-tooltip content-class="bg-white text-white bg-green">Uložiť</q-tooltip>
+					</q-btn>
+
           <q-space />
 
           <q-btn dense flat icon="minimize" @click="maximizedToggle = false" :disable="!maximizedToggle">
@@ -202,13 +209,13 @@
 							style="width: 100%">
 						</q-input>		
 
-						<q-btn label="Uložiť"
+						<!-- <q-btn label="Uložiť"
 							type="submit" 
 							color="primary" 
 							style="width: 150px; height: 35px;"
-							@click="saveChange"
+							@click="saveChange()"
 							class="q-mt-xs q-md-xs">		
-						</q-btn>
+						</q-btn> -->
 
 						<!-- historia -->
 						<div v-if="data_h_select.length > 0">

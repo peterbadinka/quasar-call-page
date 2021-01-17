@@ -12,8 +12,11 @@ export default {
 		}
 	},
 	mutations: {
-		databazaChangeFilterDate(state, payload){
+		databazaChangeFilterDate(state, payload) {
 			state.filters.filterDateValue = payload;
+		},
+		databazaSaveContacts(state, payload) {
+			state.contacts = payload;
 		}
 	}
 }
