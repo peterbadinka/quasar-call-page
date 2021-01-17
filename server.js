@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
 //=======================================================================
 // API
 //=======================================================================
-app.get('/api', (req, res) => { res.send('API v1.0.4') })
+app.get('/api', (req, res) => { res.send('API v1.0.5') })
 app.post('/api/login', jsonParser, LoginController.login)
 app.use(MainRoute);
 

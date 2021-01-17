@@ -37,7 +37,6 @@ class DatabazaController {
 		})
 	
 	}
-
 	// setContact
 	static setContact(req, res) {
 		let data = req.body.dataContact

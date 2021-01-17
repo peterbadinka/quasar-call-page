@@ -216,8 +216,9 @@ export default {
 		},
 		// saveContact
 		saveContact() {	
-			Loading.show({ spinner: QSpinnerGears })		
-			axios.post('/api/databaza/set-contact', {
+			Loading.show({ spinner: QSpinnerGears })
+			axios.post('https://app-44.herokuapp.com/api/databaza/set-contact', {
+			// axios.post('/api/databaza/set-contact', {
 				dataUser: this.$store.state.app.appData.dataUser,
 				dataContact: {
 					id_user: this.contactSelect.id_user,
@@ -231,14 +232,20 @@ export default {
 					poznamka: this.contactSelect.poznamka
 				}
 			}).then(response => {
+				if(response.data.data == undefined) {
+					Loading.hide()
+					this.showAlert('Error...')
+					return
+				}
 				this.reloadData()
-				console.log(response.data)
+				this.dialog = false
 			})
 		},
 		// deleteContact
 		deleteContact() {
 			Loading.show({ spinner: QSpinnerGears })		
-			axios.post('/api/databaza/delete-contact', {
+			axios.post('https://app-44.herokuapp.com/api/databaza/delete-contact', {
+			// axios.post('/api/databaza/delete-contact', {
 				dataUser: this.$store.state.app.appData.dataUser,
 				dataContact: {
 					id_user: this.contactSelect.id_user,
@@ -253,8 +260,13 @@ export default {
 					check_delete: 'ok',
 				}
 			}).then(response => {
+				if(response.data.data == undefined) {
+					Loading.hide()
+					this.showAlert('Error...')
+					return
+				}
 				this.reloadData()
-				console.log(response.data)
+				this.dialog = false
 			})
 		},
 		// showAlert

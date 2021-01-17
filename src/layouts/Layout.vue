@@ -15,7 +15,7 @@
           {{ activeLabel }}
         </q-toolbar-title>
 
-        <div>v1.0.4</div>
+        <div>v1.0.5</div>
       </q-toolbar>
     </q-header>
 
@@ -81,8 +81,8 @@ export default {
 			navs: [				
 				{ label: 'Call-Page', icon: 'call', to: '/', },
 				{ label: 'Call-Page (VIP)', icon: 'phone_locked', to: '/call-page-vip', },
-				// { label: 'Databáza (Lite)', icon: 'folder_shared', to: '/databaza', },
-				// { label: 'Contact', icon: 'contact_support', to: '/contact', },	
+				{ label: 'Databáza (Lite)', icon: 'folder_shared', to: '/databaza', },
+				{ label: 'Contact', icon: 'contact_support', to: '/contact', },	
 				// { label: 'Todo App', icon: 'list', to: '/todo', },
 				// { label: 'Settings', icon: 'settings', to: '/settings', },				
 				// { label: 'Test', icon: 'extension', to: '/test', },
