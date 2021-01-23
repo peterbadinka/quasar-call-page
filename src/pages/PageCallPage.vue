@@ -66,6 +66,17 @@
 		</div>
 
 		<!-- =================================================================== -->
+		<!-- check poznamka -->
+		<!-- =================================================================== -->
+		<div class="row q-mg-sm">
+			<div class="q-gutter-sm">
+				<q-checkbox 
+				v-model="checkPoznamka" 
+				label="Vyhľadať produkt v poznámke"  />
+			</div>
+		</div>
+
+		<!-- =================================================================== -->
 		<!-- input search, class = hide -->
 		<!-- =================================================================== -->
 		<div class="q-gutter-md row items-start hide">
@@ -247,6 +258,7 @@ export default {
 	//===================================================================================================
 	data() {
 		return {
+			checkPoznamka: false,
 			stav_select: '',
 			datum_akcie: '',
 			produkty: '',
@@ -334,10 +346,11 @@ export default {
 				return false
 			}
 			Loading.show({ spinner: QSpinnerGears })
-			let dataUser = this.$store.state.app.appData.dataUser
+			let dataUser = this.$store.state.app.appData.dataUser			
 			axios.post("https://app-44.herokuapp.com/api/call-page/custom-data", {
 			// axios.post("/api/call-page/custom-data", {
 				dataUser: dataUser,
+				poznamka: this.checkPoznamka,
 				dataContact: {
 					mesta: this.mesto_select,
 					searchString: this.searchString,

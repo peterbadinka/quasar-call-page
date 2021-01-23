@@ -263,10 +263,12 @@ class CallPageController {
 				sql += " AND stav != 'nekontaktovať'"
 				sql += " AND blacklist NOT LIKE '%"+req.body.dataUser.email+"%'"
 		
-				let search_1 = req.body.dataContact.searchString;
-				if(search_1.length > 0){
-					sql += " AND (poznamka LIKE '%"+search_1+"%'"
-					sql += " OR produkt LIKE '%"+search_1+"%'"
+				let search_1 = req.body.dataContact.searchString;					
+				if(search_1.length > 0){				
+					sql += " AND (produkt LIKE '%"+search_1+"%'"
+					if(req.body.poznamka == true) {
+						sql += " OR poznamka LIKE '%"+search_1+"%'"
+					}
 					sql += " OR stav LIKE '%"+search_1+"%')"
 				}		
 		

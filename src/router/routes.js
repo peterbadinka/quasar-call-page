@@ -4,7 +4,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/Layout.vue'),
     children: [			
-			{ path: '/', component: () => import('pages/PageCallPageOld.vue') },		
+			{ path: '/', component: () => import('pages/PageCallPageOld.vue') },
 			{ path: '/call-page-vip', component: () => import('pages/PageCallPage.vue') },
 			{ path: '/databaza', component: () => import('pages/PageDatabaza.vue') },
 			// { path: '/contact', component: () => import('pages/PageContact.vue') },

@@ -1,7 +1,7 @@
 <template>
   <div id="q-app">
 
-		<login-page v-if="!$store.state.app.appData.access" />
+	<login-page v-if="!$store.state.app.appData.access" />
     <router-view v-if="$store.state.app.appData.access" />
 
   </div>

@@ -20,5 +20,4 @@ Route.post('/api/databaza/get-contacts', [jsonParser, Auth.key_api], DatabazaCon
 Route.post('/api/databaza/set-contact', [jsonParser, Auth.key_api], DatabazaController.setContact)
 Route.post('/api/databaza/delete-contact', [jsonParser, Auth.key_api], DatabazaController.deleteContact)
 
-
 module.exports = Route;

@@ -27,7 +27,7 @@
 					:to="nav.to"
 					:icon="nav.icon" 
 					:label="nav.label" 
-					style="display:none"
+					style="display:none;"
 					@click="activeLabel = nav.label" />
       </q-tabs>
 		</q-footer>
@@ -37,7 +37,7 @@
       v-model="leftDrawerOpen"
       hide-if-above
       bordered
-      content-class="bg-grey-1"
+      content-class="bg-grey-1"			
     >
       <q-list>
 
