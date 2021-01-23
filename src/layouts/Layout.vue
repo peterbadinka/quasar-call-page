@@ -15,7 +15,7 @@
           {{ activeLabel }}
         </q-toolbar-title>
 
-        <div>v1.0.5</div>
+        <div>v1.0.6</div>
       </q-toolbar>
     </q-header>
 

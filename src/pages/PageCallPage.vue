@@ -1,7 +1,7 @@
 <template>
 <q-page class="q-pa-sm">
 		
-	<div class="row">
+	<div class="row q-mb-sm">
 		
 		<!-- =================================================================== -->
 		<!-- btn reload -->
@@ -9,73 +9,55 @@
 		<q-btn label=""
 			type="submit" 
 			color="primary" 
-			style="width: 54px; height: 54px;"
 			@click="reloadData"
 			class="q-mr-sm">
 			<q-icon name="cached" />
 		</q-btn>
 
 		<!-- =================================================================== -->
-		<!-- btn insert -->
+		<!-- input search -->
 		<!-- =================================================================== -->
-		<q-btn 
-			v-if="false"
-			label=""
-			type="submit" 
-			color="primary" 
-			style="width: 54px; height: 54px;"
-			@click="reloadData"
-			class="q-mr-sm">
-			<q-icon name="add" />
-		</q-btn>
+		<q-input 
+			class="q-mr-sm"
+			outlined
+			v-model="searchString"
+			label="Produkt/Stav"
+			:dense="dense"
+			@keyup.enter="reloadData"			
+			style="width: 200px">
+
+			<template v-slot:prepend>
+				<q-icon name="search" />
+			</template>
+		</q-input>			
+
 
 		<!-- =================================================================== -->
 		<!-- input search -->
 		<!-- =================================================================== -->
-		<div class="q-gutter-md row items-start q-mr-sm">
-			<q-input 
-				outlined
-				v-model="searchString"
-				label="Produkt/Stav"
-				:dense="dense"
-				@keyup.enter="reloadData"
-				style="width: 200px">
-
-				<template v-slot:prepend>
-					<q-icon name="search" />
-				</template>
-			</q-input>			
-		</div>
-
-		<!-- =================================================================== -->
-		<!-- input search -->
-		<!-- =================================================================== -->
-		<div class="q-gutter-sm row items-start q-mb-sm">
-			<q-input 
-				outlined
-				v-model="searchString_2" 
-				label="Meno/Mobil"
-				:dense="dense"
-				@keyup.enter="reloadData"
-				style="width: 200px">
-
-				<template v-slot:prepend>
-					<q-icon name="search" />
-				</template>
-			</q-input>			
-		</div>
+		<q-input 
+			outlined
+			v-model="searchString_2" 
+			label="Meno/Mobil"
+			:dense="dense"
+			@keyup.enter="reloadData"
+			style="width: 200px">
+			<template v-slot:prepend>
+				<q-icon name="search" />
+			</template>
+		</q-input>			
+	
 
 		<!-- =================================================================== -->
 		<!-- check poznamka -->
 		<!-- =================================================================== -->
-		<div class="row q-mg-sm">
-			<div class="q-gutter-sm">
-				<q-checkbox 
-				v-model="checkPoznamka" 
-				@input="checkPoznamkaChange()"
-				label="Vyhľadať produkt v poznámke"  />
-			</div>
+		<div class="q-gutter-sm">
+			<q-checkbox 
+			v-model="checkPoznamka" 
+			@input="checkPoznamkaChange()"
+			label="hľadať produkt aj v poznámke"  />
 		</div>
+
 
 		<!-- =================================================================== -->
 		<!-- input search, class = hide -->
@@ -115,7 +97,7 @@
 					<q-icon name="place" />
 				</template>
 			</q-select>
-		</div>	
+		</div>
 
 	</div>
 
