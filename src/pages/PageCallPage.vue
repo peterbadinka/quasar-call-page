@@ -72,6 +72,7 @@
 			<div class="q-gutter-sm">
 				<q-checkbox 
 				v-model="checkPoznamka" 
+				@input="checkPoznamkaChange()"
 				label="Vyhľadať produkt v poznámke"  />
 			</div>
 		</div>
@@ -295,6 +296,9 @@ export default {
 	// methods
 	//===================================================================================================
 	methods: {
+		checkPoznamkaChange() {
+			this.reloadData()
+		},
 		//=======================================================================
 		// select item
 		//=======================================================================
