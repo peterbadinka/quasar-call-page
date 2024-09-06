@@ -298,7 +298,7 @@ export default {
 
 			Loading.show({ spinner: QSpinnerGears })
 			let dataUser = this.$store.state.app.appData.dataUser
-			axios.post('https://app-44.herokuapp.com/api/call-page/update', {
+			axios.post('https://typical-vagabond-kip.glitch.me/api/call-page/update', {
 				dataUser: dataUser,
 				dataContact: {
 					id_string: this.selected_item.id_string,
@@ -333,7 +333,7 @@ export default {
 			}
 			Loading.show({ spinner: QSpinnerGears })
 			let dataUser = this.$store.state.app.appData.dataUser			
-			axios.post("https://app-44.herokuapp.com/api/call-page/custom-data", {
+			axios.post("https://typical-vagabond-kip.glitch.me/api/call-page/custom-data", {
 			// axios.post("/api/call-page/custom-data", {
 				dataUser: dataUser,
 				poznamka: this.checkPoznamka,

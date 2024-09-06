@@ -403,7 +403,7 @@ export default {
 	methods: {
 		reloadData(){
 			Loading.show({ spinner: QSpinnerGears })
-			axios.post('https://app-44.herokuapp.com/api/call-page/get-history', {
+			axios.post('https://typical-vagabond-kip.glitch.me/api/call-page/get-history', {
 				dataUser: this.$store.state.app.appData.dataUser
 			}).then(response => {				
 				this.call_h = response.data.data
@@ -416,7 +416,7 @@ export default {
 			if(this.mesto_select.length < 4) {this.showAlert('Je potrebne vybrať "Mesto"'); return;}
 			Loading.show({ spinner: QSpinnerGears })
 			let dataUser = this.$store.state.app.appData.dataUser
-			axios.post('https://app-44.herokuapp.com/api/call-page/new-contact', {
+			axios.post('https://typical-vagabond-kip.glitch.me/api/call-page/new-contact', {
 				dataUser: dataUser,
 				okres: this.mesto_select
 			}).then((response) => {
@@ -452,7 +452,7 @@ export default {
 
 			Loading.show({ spinner: QSpinnerGears })
 			let dataUser = this.$store.state.app.appData.dataUser
-			axios.post('https://app-44.herokuapp.com/api/call-page/update-new', {
+			axios.post('https://typical-vagabond-kip.glitch.me/api/call-page/update-new', {
 				dataUser: dataUser,
 				dataContact: {
 					id_string: this.new_contact.id_string,
@@ -520,7 +520,7 @@ export default {
 
 			Loading.show({ spinner: QSpinnerGears })
 			let dataUser = this.$store.state.app.appData.dataUser
-			axios.post('https://app-44.herokuapp.com/api/call-page/update', {
+			axios.post('https://typical-vagabond-kip.glitch.me/api/call-page/update', {
 				dataUser: dataUser,
 				dataContact: {
 					id_string: this.dataCall.id_string,

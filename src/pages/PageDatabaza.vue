@@ -194,7 +194,7 @@ export default {
 		reloadData() {
 			Loading.show({ spinner: QSpinnerGears })
 			this.$store.commit('databazaChangeFilterDate', this.filterDateValue)
-			axios.post('https://app-44.herokuapp.com/api/databaza/get-contacts', {
+			axios.post('https://typical-vagabond-kip.glitch.me/api/databaza/get-contacts', {
 			// axios.post('/api/databaza/get-contacts', {
 				dataUser: this.$store.state.app.appData.dataUser,
 				filterDate: this.filterDateValue
@@ -217,7 +217,7 @@ export default {
 		// saveContact
 		saveContact() {	
 			Loading.show({ spinner: QSpinnerGears })
-			axios.post('https://app-44.herokuapp.com/api/databaza/set-contact', {
+			axios.post('https://typical-vagabond-kip.glitch.me/api/databaza/set-contact', {
 			// axios.post('/api/databaza/set-contact', {
 				dataUser: this.$store.state.app.appData.dataUser,
 				dataContact: {
@@ -244,7 +244,7 @@ export default {
 		// deleteContact
 		deleteContact() {
 			Loading.show({ spinner: QSpinnerGears })		
-			axios.post('https://app-44.herokuapp.com/api/databaza/delete-contact', {
+			axios.post('https://typical-vagabond-kip.glitch.me/api/databaza/delete-contact', {
 			// axios.post('/api/databaza/delete-contact', {
 				dataUser: this.$store.state.app.appData.dataUser,
 				dataContact: {
