@@ -1,11 +1,11 @@
 const {createPool} = require('mysql')
 
 const db_1 = createPool({
-	host: 'mariadb103.websupport.sk',
-	user: 'crm41',		
-	database: 'crm41',
-	password: 'Oi9}#gH3fw',
-	port: 3313
+	host: 'mariadb105.r6.websupport.sk',
+	user: 'vejushk',		
+	database: 'deb85ddu',
+	password: 'Veronik@0708',
+	port: 3315
 })
 
 module.exports = {
