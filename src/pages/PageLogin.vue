@@ -58,7 +58,7 @@ export default {
 		login() {		
 			// Loading.show()
 			Loading.show({ spinner: QSpinnerGears })
-			let access = axios.post("https://typical-vagabond-kip.glitch.me/api/login", {
+			let access = axios.post(`${process.env.SERVER_URL}/api/login`, {
 				username: this.email,
 				password: this.pass
 			}).then((response) => {
