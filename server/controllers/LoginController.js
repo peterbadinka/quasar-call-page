@@ -25,7 +25,7 @@ class LoginController{
 		}		
 
 		// Check access
-		let url = `${process.env.DATABASE_URL}/api.php?action=app_login`
+		let url = `${process.env.AUTH_URL}/api.php?action=app_login`
 		url += "&username=" + req.body.username
 		url += "&password=" + req.body.password
 		axios.get(url).then((response) => {
