@@ -7,7 +7,7 @@ class LoginController{
 	
 	static login(req, res){
 
-		if (req.body.username == 'vejush.k@gmail.com' && req.body.password == 'Veronik@07') {
+		if (req.body.username == process.env.APP_USERNAME && req.body.password == process.env.APP_PASSWORD) {
 
 			// Get user data
 			let sql = "SELECT * FROM users"
