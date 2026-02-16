@@ -109,6 +109,7 @@
 			<tr>
 				<th style="text-align: left;">Dátum</th>
 				<th style="text-align: left;">Meno</th>
+				<th style="text-align: left;">Číslo</th>
 				<th style="text-align: left;">Stav</th>
 				<th style="text-align: left;">Produkty</th>
 				<th style="text-align: left;">Poznamka</th>	
@@ -120,6 +121,7 @@
 
 				<td>{{ dateToDMY(item.date_upg) }}</td>
 				<td>{{ item.name_full }}</td>
+				<td>{{ item.phone }}</td>
 				<td>{{ item.stav }}</td>
 				<td>{{ item.produkt }}</td>
 				<td>{{ item.poznamka }}</td>

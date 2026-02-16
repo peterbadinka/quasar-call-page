@@ -6,6 +6,7 @@
   "author": "Peter Badinka <peter.badinka44@gmail.com>",
   "private": true,
   "scripts": {
+    "dev": "quasar dev",
     "build": "quasar build",
     "start": "node server.js"
   },
