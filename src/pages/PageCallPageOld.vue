@@ -182,11 +182,11 @@
 				<tr>
 					<th style="text-align: left;">Dátum</th>
 					<th style="text-align: left;">Meno</th>
-					<th style="text-align: left;" class="hide">Mobil</th>
+					<th style="text-align: left;">Mobil</th>
 					<th style="text-align: left;">Stav</th>
 					<th style="text-align: left;">Produkty</th>
 					<th style="text-align: left;">Poznamka</th>
-					<th style="text-align: left;">Mesto</th>	
+					<th style="text-align: left;">Mesto</th>
 				</tr>
 				<tr 
 					v-for="row in rows"
@@ -195,7 +195,7 @@
 
 					<td>{{ dateToDMY(row.date_upg) }}</td>
 					<td>{{ row.name_full }}</td>
-					<td class="hide">{{ row.phone }}</td>
+					<td>{{ row.phone }}</td>
 					<td>{{ row.stav }}</td>
 					<td>{{ row.produkt }}</td>
 					<td>{{ row.poznamka }}</td>
